@@ -20,6 +20,7 @@ public class Saviezvous extends JFrame {
 
     JTextField he = new JTextField();
     JTextField we = new JTextField();
+    JTextField size = new JTextField();
 
     JPanel panel2= new JPanel();
     BufferedImage inback = null;
@@ -42,7 +43,7 @@ public class Saviezvous extends JFrame {
     }
 
     public Saviezvous() throws IOException, URISyntaxException {
-        this.setTitle("Loto");
+        this.setTitle("OA SAVIEZ VOUS");
         this.setSize(715, 642);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -85,6 +86,9 @@ public class Saviezvous extends JFrame {
                 }
             }
         });
+        panel2.add(new JLabel("Texte") );
+
+
         panel2.add(textelem );
 
 
@@ -121,21 +125,77 @@ public class Saviezvous extends JFrame {
             }
         });
         panel2.setPreferredSize(new Dimension(170,this.getHeight()));
+
+        size.setText("48");
+
+        size.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                try {
+                    generer(false);
+                } catch (IOException e1) {
+
+                } catch (URISyntaxException e1) {
+
+                }
+            }
+        });
+
+        panel2.add(new JLabel("Taille Texte") );
+
+        panel2.add(size);
+
+        panel2.add(new JLabel("Image de fond") );
+
         panel2.add(chooserbaboung );
+
+
+        we.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                try {
+                    generer(false);
+                } catch (IOException e1) {
+
+                } catch (URISyntaxException e1) {
+
+                }
+            }
+        });
+
+        he.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                try {
+                    generer(false);
+                } catch (IOException e1) {
+
+                } catch (URISyntaxException e1) {
+
+                }
+            }
+        });
 
         he.setText("0");
         we.setText("0");
+        panel2.add(new JLabel("Decalage X du fond") );
+
         panel2.add(he );
+        panel2.add(new JLabel("Decalage Y du fond") );
+
         panel2.add(we );
 
+
+    //    panel2.add(new JLabel("Generer limage") );
+
         panel2.add(button1 );
-      /*  panel.add(button2, BorderLayout.SOUTH);
-      */
+       /*  panel.add(button2, BorderLayout.SOUTH);
+       */
 
         panel.add(panel2,BorderLayout.EAST);
         panel.add(panel3,BorderLayout.WEST);
 
-       this.setContentPane(panel);
+        this.setContentPane(panel);
         this.setVisible(true);
         generer(false);
     }
@@ -165,7 +225,7 @@ public class Saviezvous extends JFrame {
 
         // BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = in.createGraphics();
-        Font font = new Font("Arial", Font.PLAIN, 48);
+        Font font = new Font("Arial", Font.PLAIN, Integer.parseInt(size.getText()));
         g2d.setFont(font);
         FontMetrics fm = g2d.getFontMetrics();
         int width = fm.stringWidth(text);
